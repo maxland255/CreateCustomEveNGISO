@@ -24,7 +24,7 @@ def create_image(path: str, name: str, image_type: str):
         print("The folder already exists")
         return
 
-    if image_type not in ["dynamips", "iol", "bin"]:
+    if image_type not in ["dynamips", "iol", "qemu"]:
         print("Invalid image type")
         return
 
@@ -44,7 +44,8 @@ def create_image(path: str, name: str, image_type: str):
     bash_script = ('#!/bin/bash\n'
                    'TMP_DIR=$1\n'
                    f'echo "Installation de l\'image {image_name}..."\n'
-                   f'mv $TMP_DIR/{image_file_name} {install_path}\n'
+                   f'mkdir -p {install_path}\n' if image_type == "qemu" else ''
+                   f'mv $TMP_DIR/{image_file_name} {install_path}\n' if image_type != "qemu" else f'mv $TMP_DIR/{image_file_name} {install_path}/virtio.qcow2'
                    f'echo "L\'installation de l\'image {image_name} s\'est terminé avec succès."\n')
 
     folder_path.mkdir(parents=True, exist_ok=False)

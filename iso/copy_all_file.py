@@ -23,8 +23,8 @@ def copy_all_file_in_iso(config: IsoConfig, script_dir: pathlib.Path):
         # Copy the images
         os.mkdir("iso_content/server/images")
 
-        for image in config.images:
-            shutil.copy(image, f"iso_content/server/images/{image}")
+        for image in config.images_path:
+            shutil.copy(image, f"iso_content/server/images/{image.name}")
 
         if config.iourc_configuration_file is not None:
             shutil.copy(config.iourc_configuration_file, "iso_content/server/create_iourc_file.py")

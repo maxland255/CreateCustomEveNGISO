@@ -1,2 +1,4 @@
 ./test/*
 ./create_project_folder.sh
+.venv
+__pycache__/

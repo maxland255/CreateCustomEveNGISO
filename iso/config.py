@@ -2,10 +2,11 @@ import pathlib
 
 
 class IsoConfig:
-    def __init__(self, include_images: bool, images: list[str] = None, server_config_name: bool = True):
+    def __init__(self, include_images: bool, images: list[str] = None, images_path: list[pathlib.Path] = None, server_config_name: bool = True):
         self.__include_images = include_images
 
         self.__images = images if images is not None else []
+        self.__images_path = images_path if images_path is not None else []
 
         self.__server_url: str | None = None
         self.__configuration_script_name: str | None = None
@@ -18,7 +19,7 @@ class IsoConfig:
             "Do you want to include the creation of the iourc configuration file in the script? (y/n) ") == "y" else False
 
         if include_iourc_creation_script:
-            self.__iourc_configuration_file = pathlib.Path("./default_scripts/create_iourc_file.py")
+            self.__iourc_configuration_file = pathlib.Path("../../../../Downloads/CreateCustomEveNGISO/default_scripts/create_iourc_file.py")
 
         if not self.__include_images:
             self.__server_url = input("Enter the server URL: ")
@@ -36,6 +37,10 @@ class IsoConfig:
     @property
     def images(self) -> list[str]:
         return self.__images
+
+    @property
+    def images_path(self) -> list[pathlib.Path]:
+        return self.__images_path
 
     @property
     def server_url(self) -> str | None:

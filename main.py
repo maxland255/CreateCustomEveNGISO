@@ -68,7 +68,7 @@ def main():
 
             extract_iso_content(iso_path, iso_mnt_dir, iso_content_dir)
 
-            config = IsoConfig(args.include_images, images_name_list)
+            config = IsoConfig(args.include_images, images_name_list, images_path_list)
 
             if not config.include_images:
                 create_client_script(config, script_dir)
